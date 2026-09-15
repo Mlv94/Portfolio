@@ -39,29 +39,44 @@
         
         <div class="veille-intro">
             <p>
-                Dans le domaine de l'informatique, rester à jour est essentiel. 
-                Je consacre du temps régulièrement à ma veille technologique pour suivre les évolutions, 
-                les nouvelles pratiques et les innovations qui façonnent notre métier.
+                Ma veille technologique en 3 axes : cybersécurité, cloud & infrastructure, DevOps & automatisation.
+                Cliquez sur un sujet ci-dessous pour afficher son actualité en direct, actualisée automatiquement.
             </p>
         </div>
 
         <div class="veille-categories">
-            <div class="veille-category-card">
+            <div class="veille-category-card" data-topic="cybersecurite">
                 <span class="veille-category-icon">🔒</span>
                 <h3>Cybersécurité</h3>
                 <p>Suivi des nouvelles vulnérabilités, techniques d'attaque et solutions de protection pour garantir la sécurité des infrastructures.</p>
             </div>
 
-            <div class="veille-category-card">
+            <div class="veille-category-card" data-topic="cloud">
                 <span class="veille-category-icon">☁️</span>
                 <h3>Cloud & Infrastructure</h3>
                 <p>Évolutions des services cloud, virtualisation, conteneurisation et nouvelles architectures système.</p>
             </div>
 
-            <div class="veille-category-card">
+            <div class="veille-category-card" data-topic="devops">
                 <span class="veille-category-icon">🚀</span>
                 <h3>DevOps & Automatisation</h3>
                 <p>Outils d'automatisation, CI/CD, orchestration et meilleures pratiques pour optimiser le déploiement.</p>
+            </div>
+        </div>
+
+        <div class="veille-live" id="veilleLive">
+            <div class="veille-live-header">
+                <div>
+                    <h3>Actualité <span class="accent-text">en direct</span></h3>
+                    <p class="veille-live-subtitle" id="veilleLiveSubtitle">Chargement du sujet par défaut...</p>
+                </div>
+                <div class="veille-live-controls">
+                    <span class="veille-live-updated" id="veilleLiveUpdated"></span>
+                    <button class="veille-live-refresh" id="veilleLiveRefresh" type="button">↻ Actualiser</button>
+                </div>
+            </div>
+            <div class="veille-live-list" id="veilleLiveList">
+                <p class="veille-live-loading">⏳ Chargement des dernières actualités...</p>
             </div>
         </div>
 
@@ -201,7 +216,7 @@
                 <a href="mailto:votre@email.com">Email</a>
                 <a href="https://github.com/TartiFloux" target="_blank">GitHub</a>
                 <a href="https://linkedin.com/in/leguaymelvyn" target="_blank">LinkedIn</a>
-                <a href="https://sites.google.com/view/leguaymelvyncv/cv" target="_blank">CV</a>
+                <a href="https://drive.google.com/file/d/1U8oiVSxj1oqTdxWoufsMnDy12orH7d-z/view" target="_blank" class="cv-link">CV</a>
             </div>
         </div>
     </footer>
