@@ -242,6 +242,40 @@ const observer = new IntersectionObserver((entries) => {
         }).join('');
     }
 
+    function parseRSS(xmlText) {
+        const doc = new DOMParser().parseFromString(xmlText, 'text/xml');
+        if (doc.querySelector('parsererror')) throw new Error('Flux mal formé');
+        return Array.from(doc.querySelectorAll('item')).map(item => ({
+            title: item.querySelector('title')?.textContent || '',
+            link: item.querySelector('link')?.textContent || '',
+            pubDate: item.querySelector('pubDate')?.textContent || '',
+            description: item.querySelector('description')?.textContent || ''
+        }));
+    }
+
+    // Proxies CORS gratuits et sans clé API, utilisés dans l'ordre (repli en cas d'échec du premier).
+    const CORS_PROXIES = [
+        (url) => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url),
+        (url) => 'https://corsproxy.io/?url=' + encodeURIComponent(url)
+    ];
+
+    async function fetchFeed(feedUrl) {
+        let lastError = null;
+        for (const buildProxyUrl of CORS_PROXIES) {
+            try {
+                const res = await fetch(buildProxyUrl(feedUrl));
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                const text = await res.text();
+                const items = parseRSS(text);
+                if (items.length === 0) throw new Error('Flux vide');
+                return items;
+            } catch (err) {
+                lastError = err;
+            }
+        }
+        throw lastError || new Error('Flux indisponible');
+    }
+
     function loadTopic(topicKey) {
         const topic = topics[topicKey];
         if (!topic) return;
@@ -254,13 +288,9 @@ const observer = new IntersectionObserver((entries) => {
         renderLoading();
         if (refreshBtn) refreshBtn.disabled = true;
 
-        const apiUrl = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(topic.feed);
-
-        fetch(apiUrl)
-            .then(res => res.json())
-            .then(data => {
-                if (data.status !== 'ok') throw new Error('Flux indisponible');
-                renderItems(data.items);
+        fetchFeed(topic.feed)
+            .then(items => {
+                renderItems(items);
                 if (updatedLabel) {
                     updatedLabel.textContent = 'Dernière mise à jour : ' +
                         new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
