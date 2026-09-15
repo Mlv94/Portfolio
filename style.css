@@ -288,134 +288,160 @@
             letter-spacing: -0.02em;
         }
 
-        /* SECTION EXPÉRIENCES PROFESSIONNELLES — grille asymétrique */
-        .experience-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-        }
-
-        .experience-card {
+        /* SECTION EXPÉRIENCES PROFESSIONNELLES — frise chronologique */
+        .experiences-timeline {
             position: relative;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 2.5rem;
-            overflow: hidden;
-            transition: all 0.4s ease;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .experience-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--accent);
-            box-shadow: 0 20px 60px rgba(150, 255, 243, 0.1);
-        }
-
-        .experience-card-number {
+        .experiences-timeline::before {
+            content: '';
             position: absolute;
-            top: -0.5rem;
-            right: 1.5rem;
-            font-family: 'Fraunces', serif;
-            font-size: 7rem;
-            font-weight: 800;
-            color: var(--border);
-            line-height: 1;
-            pointer-events: none;
-            z-index: 0;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--accent) 0%, var(--border) 100%);
+            transform: translateX(-50%);
         }
 
-        .experience-card > * {
+        .experience-item {
             position: relative;
-            z-index: 1;
-        }
-
-        .experience-card-top {
+            margin-bottom: 4rem;
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            flex-wrap: wrap;
-            margin-bottom: 1.25rem;
         }
 
-        .experience-card-date {
-            display: inline-block;
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: var(--accent);
-            padding: 0.35rem 0.9rem;
-            border: 1px solid var(--accent);
-            border-radius: 50px;
-            white-space: nowrap;
+        .experience-item:nth-child(odd) {
+            flex-direction: row;
         }
 
-        .experience-card-badge {
-            font-size: 0.8rem;
-            color: var(--bg-primary);
+        .experience-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .experience-content {
+            width: calc(50% - 3rem);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .experience-content:hover {
+            border-color: var(--accent);
+            transform: scale(1.03);
+            box-shadow: 0 20px 60px rgba(150, 255, 243, 0.15);
+        }
+
+        .experience-item:nth-child(odd) .experience-content::after {
+            content: '';
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-left: 20px solid var(--border);
+            transition: border-left-color 0.4s ease;
+        }
+
+        .experience-item:nth-child(odd) .experience-content:hover::after {
+            border-left-color: var(--accent);
+        }
+
+        .experience-item:nth-child(even) .experience-content::after {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-right: 20px solid var(--border);
+            transition: border-right-color 0.4s ease;
+        }
+
+        .experience-item:nth-child(even) .experience-content:hover::after {
+            border-right-color: var(--accent);
+        }
+
+        .experience-date {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
             background: var(--accent);
-            padding: 0.35rem 0.9rem;
+            color: var(--bg-primary);
+            padding: 0.5rem 1.5rem;
             border-radius: 50px;
             font-weight: 700;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            box-shadow: 0 5px 20px rgba(234, 150, 255, 0.3);
+            z-index: 10;
         }
 
-        .experience-card h3 {
+        .experience-icon {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            background: var(--bg-primary);
+            border: 3px solid var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            z-index: 5;
+        }
+
+        .experience-title {
             font-family: 'Fraunces', serif;
             font-size: 1.6rem;
-            font-weight: 600;
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.3rem;
             color: var(--text-primary);
+            font-weight: 600;
         }
 
-        .experience-card-company {
-            display: block;
-            color: var(--text-secondary);
-            margin-bottom: 1.25rem;
-            font-size: 1rem;
+        .experience-company {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+            font-weight: 500;
         }
 
-        .experience-card-company::before {
-            content: '— ';
-        }
-
-        .experience-card-desc {
+        .experience-description {
             color: var(--text-secondary);
             line-height: 1.8;
-            margin-bottom: 1.5rem;
         }
 
-        .experience-card-tasks {
+        .experience-tasks {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
             list-style: none;
             display: flex;
             flex-wrap: wrap;
             gap: 0.6rem;
         }
 
-        .experience-card-tasks li {
-            color: var(--text-secondary);
+        .experience-tasks li {
             padding: 0.4rem 1rem;
+            background: var(--bg-primary);
             border: 1px solid var(--border);
-            border-radius: 50px;
+            border-radius: 15px;
             font-size: 0.85rem;
-        }
-
-        /* Carte mise en avant : pleine largeur, expérience la plus marquante */
-        .experience-card-featured {
-            grid-column: 1 / -1;
-            padding: 3rem;
-            background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(150, 255, 243, 0.06) 100%);
-        }
-
-        .experience-card-featured .experience-card-number {
-            font-size: 10rem;
-            top: -1.5rem;
-        }
-
-        .experience-card-featured h3 {
-            font-size: 2rem;
-        }
-
-        /* Décalage vertical pour casser l'alignement strict des cartes secondaires */
-        .experience-grid .experience-card:nth-of-type(2) {
-            margin-top: 2.5rem;
+            color: var(--text-secondary);
         }
 
         /* PROJETS EN LIGNE */
@@ -789,6 +815,140 @@
             line-height: 1.6;
         }
 
+        .veille-category-card.active {
+            border-color: var(--accent);
+            box-shadow: 0 20px 60px rgba(150, 255, 243, 0.2);
+        }
+
+        .veille-category-card.active::before {
+            transform: scaleX(1);
+        }
+
+        /* Module "Actualité en direct" (flux RSS) */
+        .veille-live {
+            margin-bottom: 4rem;
+            padding: 3rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+        }
+
+        .veille-live-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .veille-live-header h3 {
+            font-family: 'Fraunces', serif;
+            font-size: 1.8rem;
+            color: var(--text-primary);
+        }
+
+        .veille-live-subtitle {
+            color: var(--text-secondary);
+            margin-top: 0.4rem;
+            font-size: 0.95rem;
+        }
+
+        .veille-live-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .veille-live-updated {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .veille-live-refresh {
+            background: var(--accent);
+            color: var(--bg-primary);
+            border: none;
+            padding: 0.6rem 1.3rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .veille-live-refresh:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(150, 255, 243, 0.3);
+        }
+
+        .veille-live-refresh:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .veille-live-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .veille-live-empty,
+        .veille-live-error,
+        .veille-live-loading {
+            color: var(--text-secondary);
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .veille-live-error {
+            color: #ff9696;
+        }
+
+        .veille-live-item {
+            display: block;
+            padding: 1.25rem 1.5rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .veille-live-item:hover {
+            border-color: var(--accent);
+            transform: translateX(6px);
+        }
+
+        .veille-live-item-date {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+        }
+
+        .veille-live-item-title {
+            display: block;
+            font-family: 'Fraunces', serif;
+            font-size: 1.15rem;
+            color: var(--text-primary);
+            margin-bottom: 0.3rem;
+            line-height: 1.4;
+        }
+
+        .veille-live-item-desc {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
         .veille-articles {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -1044,24 +1204,35 @@
                 display: none;
             }
 
-            .experience-grid {
-                grid-template-columns: 1fr;
+            .experiences-timeline::before {
+                left: 30px;
             }
 
-            .experience-grid .experience-card:nth-of-type(2) {
-                margin-top: 0;
+            .experience-item,
+            .experience-item:nth-child(odd),
+            .experience-item:nth-child(even) {
+                flex-direction: row !important;
             }
 
-            .experience-card-featured {
-                padding: 2rem;
+            .experience-content {
+                width: calc(100% - 6rem);
+                margin-left: 4rem;
             }
 
-            .experience-card-number {
-                font-size: 4.5rem;
+            .experience-date {
+                left: 30px;
+                transform: translateX(0);
+                top: -40px;
             }
 
-            .experience-card-featured .experience-card-number {
-                font-size: 5.5rem;
+            .experience-icon {
+                left: 30px;
+                transform: translate(-50%, 0);
+            }
+
+            .experience-item:nth-child(odd) .experience-content::after,
+            .experience-item:nth-child(even) .experience-content::after {
+                display: none;
             }
         }
 
@@ -1275,4 +1446,126 @@ footer {
     .section-intro {
         margin-top: -1.5rem;
     }
+}
+
+/* Verrou par mot de passe (liens sensibles : CV) */
+.cv-lock-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 10, 15, 0.75);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    padding: 1.5rem;
+}
+
+.cv-lock-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.cv-lock-modal {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2.5rem;
+    max-width: 380px;
+    width: 100%;
+    text-align: center;
+    transform: translateY(10px);
+    transition: transform 0.3s ease;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+}
+
+.cv-lock-overlay.active .cv-lock-modal {
+    transform: translateY(0);
+}
+
+.cv-lock-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.cv-lock-modal h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.cv-lock-modal p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+}
+
+.cv-lock-input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-family: inherit;
+    margin-bottom: 0.75rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.cv-lock-input:focus {
+    border-color: var(--accent);
+}
+
+.cv-lock-error {
+    color: #ff9696;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+    display: none;
+}
+
+.cv-lock-error.visible {
+    display: block;
+}
+
+.cv-lock-actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.cv-lock-btn {
+    flex: 1;
+    padding: 0.7rem 1rem;
+    border-radius: 50px;
+    border: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    font-family: inherit;
+    background: var(--accent);
+    color: var(--bg-primary);
+    transition: all 0.3s ease;
+}
+
+.cv-lock-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(150, 255, 243, 0.3);
+}
+
+.cv-lock-btn-ghost {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+}
+
+.cv-lock-btn-ghost:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    box-shadow: none;
+    transform: none;
 }
