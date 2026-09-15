@@ -182,6 +182,10 @@ const observer = new IntersectionObserver((entries) => {
     // Un sujet = un flux RSS public associé. hnrss.org génère un flux RSS
     // à partir d'une recherche sur Hacker News, mis à jour en continu.
     const topics = {
+        'windows-admin': {
+            label: 'Administration Windows & AD',
+            feed: 'https://www.it-connect.fr/feed/'
+        },
         cybersecurite: {
             label: 'Cybersécurité',
             feed: 'https://hnrss.org/newest?q=cybersecurity'
@@ -290,7 +294,7 @@ const observer = new IntersectionObserver((entries) => {
     }
 
     // Sujet chargé par défaut à l'arrivée sur la page
-    loadTopic('cybersecurite');
+    loadTopic('windows-admin');
 })();
 
 document.querySelectorAll('.project-card, .skill-category, .formation-item, .veille-category-card, .veille-article, .experience-item').forEach(el => {
