@@ -2,6 +2,15 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <script>
+        (function () {
+            try {
+                if (localStorage.getItem('siteUnlocked') !== '1') {
+                    document.documentElement.style.visibility = 'hidden';
+                }
+            } catch (e) {}
+        })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Expériences professionnelles - LEGUAY Melvyn</title>
     <meta name="description" content="Portfolio de LEGUAY Melvyn, technicien supérieur en informatique (BTS SIO SISR) - Expériences.">
@@ -108,7 +117,7 @@
                 <a href="mailto:votre@email.com">Email</a>
                 <a href="https://github.com/TartiFloux" target="_blank">GitHub</a>
                 <a href="https://linkedin.com/in/leguaymelvyn" target="_blank">LinkedIn</a>
-                <a href="https://drive.google.com/file/d/1U8oiVSxj1oqTdxWoufsMnDy12orH7d-z/view" target="_blank" class="cv-link">CV</a>
+                <a href="https://drive.google.com/file/d/1U8oiVSxj1oqTdxWoufsMnDy12orH7d-z/view" target="_blank">CV</a>
             </div>
         </div>
     </footer>

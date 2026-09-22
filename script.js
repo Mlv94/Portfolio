@@ -55,77 +55,67 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Protection par mot de passe des liens sensibles (CV)
+// Protection par mot de passe de l'ensemble du site
 // NB : ceci est une protection côté client (dissuasive), pas une vraie sécurité :
-// le hash est visible dans ce fichier. Elle évite juste les clics/accès non voulus.
+// le hash est visible dans ce fichier. Un script inline placé dans le <head> de
+// chaque page masque déjà la page (visibility: hidden) avant même que ce fichier
+// ne se charge, pour éviter tout flash de contenu non protégé.
 (function () {
-    const cvLinks = document.querySelectorAll('a.cv-link');
-    if (cvLinks.length === 0) return;
-
     // Hash SHA-256 du mot de passe. Pour changer le mot de passe :
     // ouvrez la console du navigateur et tapez :
     // crypto.subtle.digest('SHA-256', new TextEncoder().encode('votre_nouveau_mdp'))
     //   .then(b => console.log([...new Uint8Array(b)].map(x => x.toString(16).padStart(2,'0')).join('')))
-    // puis collez le résultat ci-dessous.
-    const CV_PASSWORD_HASH = '09df2a3ea55d906a9b0111bf58615047d58e01faa72d7bf6a3feed701a8c2772';
-    const SESSION_KEY = 'cvUnlocked';
+    // puis collez le résultat ci-dessous. Mot de passe par défaut : portfolio2026
+    const SITE_PASSWORD_HASH = '9881928f60e14fcbd7a28d2166ee4e8ba456daa9df696159dcae35050762895b';
+    const STORAGE_KEY = 'siteUnlocked';
 
-    // sessionStorage peut être bloqué (fichier ouvert en local, navigation privée...).
-    // On retombe alors sur une simple variable en mémoire pour la durée de la page.
-    let memoryUnlocked = false;
+    function reveal() {
+        document.documentElement.style.visibility = '';
+    }
+
     function isUnlocked() {
         try {
-            return sessionStorage.getItem(SESSION_KEY) === '1';
+            return localStorage.getItem(STORAGE_KEY) === '1';
         } catch (e) {
-            return memoryUnlocked;
+            return false;
         }
     }
+
+    if (isUnlocked()) {
+        reveal();
+        return;
+    }
+
     function setUnlocked() {
-        memoryUnlocked = true;
         try {
-            sessionStorage.setItem(SESSION_KEY, '1');
+            localStorage.setItem(STORAGE_KEY, '1');
         } catch (e) {
-            // Stockage indisponible : on garde uniquement le repli mémoire ci-dessus.
+            // Stockage indisponible : le mot de passe sera redemandé à chaque page.
         }
     }
 
-    let pendingUrl = null;
-
-    // Construction de la modale (une seule fois, réutilisée pour tous les liens)
     const overlay = document.createElement('div');
-    overlay.className = 'cv-lock-overlay';
+    overlay.className = 'access-lock-overlay active';
+    overlay.style.visibility = 'visible';
     overlay.innerHTML = `
-        <div class="cv-lock-modal" role="dialog" aria-modal="true" aria-label="Accès protégé">
-            <div class="cv-lock-icon">🔒</div>
-            <h3>Accès protégé</h3>
-            <p>Ce document est protégé par un mot de passe.</p>
-            <input type="password" class="cv-lock-input" id="cvLockInput" placeholder="Mot de passe" autocomplete="off">
-            <p class="cv-lock-error" id="cvLockError">Mot de passe incorrect, réessayez.</p>
-            <div class="cv-lock-actions">
-                <button type="button" class="cv-lock-btn cv-lock-btn-ghost" id="cvLockCancel">Annuler</button>
-                <button type="button" class="cv-lock-btn" id="cvLockSubmit">Valider</button>
+        <div class="access-lock-modal" role="dialog" aria-modal="true" aria-label="Accès protégé">
+            <div class="access-lock-icon">🔒</div>
+            <h3>Site protégé</h3>
+            <p>Ce portfolio est protégé par un mot de passe. Merci de le saisir pour continuer.</p>
+            <input type="password" class="access-lock-input" id="siteLockInput" placeholder="Mot de passe" autocomplete="off">
+            <p class="access-lock-error" id="siteLockError">Mot de passe incorrect, réessayez.</p>
+            <div class="access-lock-actions">
+                <button type="button" class="access-lock-btn" id="siteLockSubmit" style="flex: 1;">Valider</button>
             </div>
         </div>
     `;
     document.body.appendChild(overlay);
 
-    const input = overlay.querySelector('#cvLockInput');
-    const errorMsg = overlay.querySelector('#cvLockError');
-    const submitBtn = overlay.querySelector('#cvLockSubmit');
-    const cancelBtn = overlay.querySelector('#cvLockCancel');
+    const input = overlay.querySelector('#siteLockInput');
+    const errorMsg = overlay.querySelector('#siteLockError');
+    const submitBtn = overlay.querySelector('#siteLockSubmit');
 
-    function openModal(url) {
-        pendingUrl = url;
-        errorMsg.classList.remove('visible');
-        input.value = '';
-        overlay.classList.add('active');
-        setTimeout(() => input.focus(), 50);
-    }
-
-    function closeModal() {
-        overlay.classList.remove('active');
-        pendingUrl = null;
-    }
+    setTimeout(() => input.focus(), 50);
 
     async function sha256(text) {
         const buffer = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
@@ -134,11 +124,11 @@ const observer = new IntersectionObserver((entries) => {
 
     async function checkPassword() {
         const hash = await sha256(input.value);
-        if (hash === CV_PASSWORD_HASH) {
+        if (hash === SITE_PASSWORD_HASH) {
             setUnlocked();
-            const url = pendingUrl;
-            closeModal();
-            if (url) window.open(url, '_blank', 'noopener');
+            overlay.classList.remove('active');
+            reveal();
+            setTimeout(() => overlay.remove(), 300);
         } else {
             errorMsg.classList.add('visible');
             input.value = '';
@@ -147,25 +137,8 @@ const observer = new IntersectionObserver((entries) => {
     }
 
     submitBtn.addEventListener('click', checkPassword);
-    cancelBtn.addEventListener('click', closeModal);
-    overlay.addEventListener('click', (e) => {
-        if (e.target === overlay) closeModal();
-    });
     input.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') checkPassword();
-        if (e.key === 'Escape') closeModal();
-    });
-
-    cvLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const url = link.getAttribute('href');
-            if (isUnlocked()) {
-                window.open(url, '_blank', 'noopener');
-            } else {
-                openModal(url);
-            }
-        });
     });
 })();
 

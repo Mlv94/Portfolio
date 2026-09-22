@@ -2,6 +2,15 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <script>
+        (function () {
+            try {
+                if (localStorage.getItem('siteUnlocked') !== '1') {
+                    document.documentElement.style.visibility = 'hidden';
+                }
+            } catch (e) {}
+        })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projets - LEGUAY Melvyn</title>
     <meta name="description" content="Portfolio de LEGUAY Melvyn, technicien supérieur en informatique (BTS SIO SISR) - Projets.">
@@ -37,13 +46,21 @@
     <div class="container">
         <h2 class="section-title">Projets <span class="accent-text">récents</span></h2>
         <p class="section-intro">Des projets personnels menés en autonomie, du serveur Windows jusqu'à l'administration système au quotidien.</p>
-        <div class="projects-grid">
-            <div class="project-card">
-                <div class="project-image" style="background-image: url('https://partner.microsoft.com/-/media/mssc/mpn/partner/solutions/images/featurecontent-3-column-_500x280_windows_server.jpg?h=280&iar=0&w=500&la=fr&hash=CC405F6D89393BA8BAD21E9CEF73592E'); background-size: cover; background-position: center;"></div>
-                <div class="project-content">
-                    <h3>Windows Server</h3>
-                    <p>Mise en place d'un serveur Windows virtuel.</p>
-                    <p>Configuration de Active Directory et des GPO pour les différentes machines virtuel (utilisateurs)</p>
+
+        <div class="projects-featured">
+            <!-- Projet 1 - Windows Server / Active Directory -->
+            <article class="project-feature-card">
+                <div class="project-feature-media" style="background-image: url('https://partner.microsoft.com/-/media/mssc/mpn/partner/solutions/images/featurecontent-3-column-_500x280_windows_server.jpg?h=280&iar=0&w=500&la=fr&hash=CC405F6D89393BA8BAD21E9CEF73592E');"></div>
+                <div class="project-feature-body">
+                    <span class="project-feature-badge">🪟 Infrastructure Windows</span>
+                    <h3>Serveur Windows Server &amp; Active Directory</h3>
+                    <p class="project-feature-lead">Déploiement d'un serveur Windows virtuel avec un annuaire Active Directory complet et une politique de sécurité appliquée par GPO à l'ensemble des postes clients.</p>
+                    <ul class="project-feature-list">
+                        <li><span class="check">✔</span> Installation et configuration d'<strong>Active Directory Domain Services (AD DS)</strong> : création du domaine, des unités d'organisation et des comptes utilisateurs</li>
+                        <li><span class="check">✔</span> Rédaction de <strong>stratégies de groupe (GPO)</strong> interdisant l'accès au Panneau de configuration pour les comptes standards</li>
+                        <li><span class="check">✔</span> Mise en place d'une <strong>politique de gestion des mots de passe</strong> (complexité, durée de validité, verrouillage de compte) via GPO</li>
+                        <li><span class="check">✔</span> <strong>Ajout et organisation des utilisateurs</strong> dans l'annuaire, avec attribution des droits selon les unités d'organisation</li>
+                    </ul>
                     <div class="project-tags">
                         <span class="tag">🪟 Windows Server 2022</span>
                         <span class="tag">🛂 Active Directory</span>
@@ -51,8 +68,33 @@
                         <span class="tag">🌐 VirtualBox</span>
                     </div>
                 </div>
-            </div>
+            </article>
 
+            <!-- Projet 2 - GLPI + FusionInventory -->
+            <article class="project-feature-card">
+                <div class="project-feature-media project-feature-media--icon">🗂️</div>
+                <div class="project-feature-body">
+                    <span class="project-feature-badge">🖥️ Gestion de parc</span>
+                    <h3>GLPI &amp; FusionInventory</h3>
+                    <p class="project-feature-lead">Mise en place d'un outil de gestion de parc informatique (GLPI) couplé au plugin FusionInventory pour automatiser l'inventaire matériel et logiciel du parc.</p>
+                    <ul class="project-feature-list">
+                        <li><span class="check">✔</span> Installation et configuration de <strong>GLPI</strong> (serveur web, base de données MySQL) pour centraliser la gestion des équipements et des tickets</li>
+                        <li><span class="check">✔</span> Installation du plugin <strong>FusionInventory</strong> et déploiement de l'agent sur les postes clients</li>
+                        <li><span class="check">✔</span> Configuration des <strong>tâches d'inventaire automatique</strong> (matériel, logiciels, réseau) remontées automatiquement vers GLPI</li>
+                        <li><span class="check">✔</span> Organisation du parc (entités, catégories, états) pour un suivi précis du matériel</li>
+                    </ul>
+                    <div class="project-tags">
+                        <span class="tag">🗂️ GLPI</span>
+                        <span class="tag">📦 FusionInventory</span>
+                        <span class="tag">🐬 MySQL</span>
+                        <span class="tag">🌐 Apache</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <h3 class="projects-subtitle">Autres <span class="accent-text">réalisations</span></h3>
+        <div class="projects-grid">
             <div class="project-card">
                 <div class="project-image" style="background-image: url('https://media.discordapp.net/attachments/1179768570226421802/1471061855249105059/Capture_decran_2026-02-11_a_09.34.15.png?ex=698d909d&is=698c3f1d&hm=43d7c53258914b8663d141a09bb2633203fe9be84eef3e5cc5e2b4efc22d5917&=&format=webp&quality=lossless&width=2494&height=1268'); background-size: cover; background-position: center;"></div>
                 <div class="project-content">
