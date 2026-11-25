@@ -13,23 +13,23 @@
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Veille technologique - LEGUAY Melvyn</title>
-    <meta name="description" content="Veille technologique de LEGUAY Melvyn (BTS SIO SISR) : l'évolution des EDR/XDR après la panne CrowdStrike, sortie du noyau Windows et EDR killers.">
+    <meta name="description" content="Portfolio de LEGUAY Melvyn, technicien supérieur en informatique (BTS SIO SISR) - Veille technologique.">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,600;9..144,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="cursor-glow" aria-hidden="true"></div>
+    <div class="cursor-glow"></div>
 
     <header>
-        <a href="index.html" class="logo">Portfolio - Melvyn</a>
+        <div class="logo">Portfolio - Melvyn</div>
 
         <!-- Menu Burger -->
-        <button type="button" class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav">
+        <div class="menu-toggle" id="menuToggle">
             <span></span>
             <span></span>
             <span></span>
-        </button>
+        </div>
 
         <nav id="nav">
             <a href="index.html">Accueil</a>
@@ -45,133 +45,31 @@
 <section id="veille">
     <div class="container">
         <h2 class="section-title">Veille <span class="accent-text">technologique</span></h2>
-        <p class="section-intro">Un sujet suivi dans la durée, choisi parce qu'il touche directement mon métier d'administrateur systèmes et réseaux.</p>
-
-        <!-- Sujet -->
-        <div class="veille-subject">
-            <span class="veille-subject-kicker">🛡️ Sujet de veille · Cybersécurité des postes de travail</span>
-            <h3>EDR / XDR : protéger les postes sans les mettre en danger</h3>
-            <p class="veille-subject-question">
-                <strong>Problématique :</strong> comment les solutions EDR/XDR évoluent-elles pour rester efficaces face aux attaques,
-                sans compromettre la stabilité des systèmes qu'elles protègent ?
+        
+        <div class="veille-intro">
+            <p>
+                Ma veille technologique en 3 axes : cybersécurité, cloud & infrastructure, DevOps & automatisation.
+                Cliquez sur un sujet ci-dessous pour afficher son actualité en direct, actualisée automatiquement.
             </p>
-            <div class="veille-subject-why">
-                <h4>Pourquoi ce sujet ?</h4>
-                <p>
-                    Lors de mon stage au Département du Val-de-Marne (mai – juin 2026), j'ai participé à la configuration et au
-                    déploiement de l'XDR <strong>CrowdStrike Falcon</strong>. C'est précisément cet éditeur qui a provoqué en juillet 2024
-                    l'une des plus grandes pannes informatiques de l'histoire. Depuis, Microsoft revoit la place des outils de sécurité dans
-                    Windows, pendant que les groupes de rançongiciels industrialisent les outils capables de désactiver ces mêmes EDR.
-                    Le sujet évolue chaque mois et concerne directement tout technicien SISR.
-                </p>
-            </div>
         </div>
 
-        <!-- Notions clés -->
-        <h3 class="veille-heading">Les notions <span class="accent-text">clés</span></h3>
-        <div class="veille-defs">
-            <div class="veille-def">
-                <span class="veille-def-term">Antivirus</span>
-                <p>Compare les fichiers à des signatures de logiciels malveillants connus. Efficace contre les menaces déjà répertoriées, limité face aux attaques nouvelles.</p>
-            </div>
-            <div class="veille-def">
-                <span class="veille-def-term">EDR</span>
-                <p><em>Endpoint Detection &amp; Response.</em> Surveille en continu le comportement du poste (processus, réseau, registre), détecte les activités suspectes et permet d'isoler la machine à distance.</p>
-            </div>
-            <div class="veille-def">
-                <span class="veille-def-term">XDR</span>
-                <p><em>Extended Detection &amp; Response.</em> Étend l'EDR en corrélant les données des postes, des serveurs, de la messagerie, du cloud et des identités dans une seule console.</p>
-            </div>
-            <div class="veille-def">
-                <span class="veille-def-term">Noyau (kernel)</span>
-                <p>Cœur du système d'exploitation. Un pilote qui y plante fait planter toute la machine : c'est ce qui s'est passé lors de la panne CrowdStrike.</p>
-            </div>
-            <div class="veille-def">
-                <span class="veille-def-term">BYOVD</span>
-                <p><em>Bring Your Own Vulnerable Driver.</em> L'attaquant installe un pilote légitime mais vulnérable, puis l'exploite pour couper l'EDR depuis le noyau avant de chiffrer les données.</p>
-            </div>
-            <div class="veille-def">
-                <span class="veille-def-term">EDR killer</span>
-                <p>Outil dont le seul but est de désactiver les solutions de sécurité. Il est devenu une étape standard des attaques par rançongiciel.</p>
-            </div>
-        </div>
-
-        <!-- Chronologie -->
-        <h3 class="veille-heading">Chronologie <span class="accent-text">du sujet</span></h3>
-        <ol class="veille-timeline">
-            <li>
-                <span class="veille-timeline-date">19 juillet 2024</span>
-                <h4>Panne mondiale CrowdStrike</h4>
-                <p>Une mise à jour défectueuse du capteur Falcon, chargé dans le noyau, bloque environ 8,5 millions de PC Windows (écran bleu) : aéroports, hôpitaux, banques à l'arrêt.</p>
-            </li>
-            <li>
-                <span class="veille-timeline-date">Novembre 2024</span>
-                <h4>Microsoft lance la Windows Resiliency Initiative</h4>
-                <p>Microsoft annonce vouloir permettre aux éditeurs de sécurité de fonctionner en dehors du noyau, et ajoute des outils de récupération à distance des postes bloqués.</p>
-            </li>
-            <li>
-                <span class="veille-timeline-date">Juin 2025</span>
-                <h4>Premier aperçu privé pour les éditeurs</h4>
-                <p>Microsoft ouvre aux éditeurs d'antivirus et d'EDR une préversion de la nouvelle plateforme permettant de faire tourner leurs produits en mode utilisateur.</p>
-            </li>
-            <li>
-                <span class="veille-timeline-date">Mars 2026</span>
-                <h4>ESET recense près de 90 « EDR killers »</h4>
-                <p>Dont 54 reposent sur la technique BYOVD et exploitent 35 pilotes vulnérables. Certains semblent avoir été développés avec l'aide de l'IA.</p>
-            </li>
-            <li>
-                <span class="veille-timeline-date">Avril 2026</span>
-                <h4>Qilin et Warlock industrialisent le BYOVD</h4>
-                <p>Ces groupes de rançongiciels utilisent des outils capables de neutraliser plus de 300 produits de sécurité avant de chiffrer le moindre fichier.</p>
-            </li>
-            <li>
-                <span class="veille-timeline-date">Novembre 2026</span>
-                <h4>Windows Endpoint Security Platform</h4>
-                <p>La plateforme se concrétise sous Windows 11 : Bitdefender et Sophos visent fin 2026, ESET février 2027 et CrowdStrike Falcon le premier trimestre 2027. Windows 10 ne devrait pas en bénéficier.</p>
-            </li>
-        </ol>
-
-        <!-- Enjeux -->
-        <h3 class="veille-heading">Ce que ça change <span class="accent-text">pour un admin SISR</span></h3>
-        <div class="veille-stakes">
-            <div class="veille-stake">
-                <span class="veille-stake-icon">🔁</span>
-                <h4>Déployer les mises à jour par vagues</h4>
-                <p>Un groupe pilote d'abord, puis le reste du parc. Une mise à jour défectueuse ne doit jamais toucher toutes les machines en même temps.</p>
-            </div>
-            <div class="veille-stake">
-                <span class="veille-stake-icon">🚫</span>
-                <h4>Bloquer les pilotes vulnérables</h4>
-                <p>Activer la liste de blocage des pilotes vulnérables de Microsoft et l'intégrité de la mémoire (HVCI), et surveiller l'installation de nouveaux pilotes.</p>
-            </div>
-            <div class="veille-stake">
-                <span class="veille-stake-icon">🚨</span>
-                <h4>Alerter si l'EDR s'arrête</h4>
-                <p>Un agent EDR qui cesse de remonter des informations est un signal d'attaque, pas une simple panne : il doit déclencher une alerte immédiate.</p>
-            </div>
-            <div class="veille-stake">
-                <span class="veille-stake-icon">🧱</span>
-                <h4>Ne pas tout miser sur un seul outil</h4>
-                <p>Défense en profondeur : sauvegardes hors ligne, comptes à privilèges limités, GPO, segmentation réseau et plan de reprise testé.</p>
-            </div>
-        </div>
-
-        <!-- Actualité en direct -->
         <div class="veille-categories">
-            <div class="veille-category-card" data-topic="edr">
-                <span class="veille-category-icon">🛡️</span>
-                <h3>EDR / XDR</h3>
-                <p>Nouveautés des solutions de protection des postes et évolutions de Windows.</p>
+            <div class="veille-category-card" data-topic="cybersecurite">
+                <span class="veille-category-icon">🔒</span>
+                <h3>Cybersécurité</h3>
+                <p>Suivi des nouvelles vulnérabilités, techniques d'attaque et solutions de protection pour garantir la sécurité des infrastructures.</p>
             </div>
-            <div class="veille-category-card" data-topic="ransomware">
-                <span class="veille-category-icon">💀</span>
-                <h3>Rançongiciels</h3>
-                <p>Techniques des groupes d'attaquants, dont les EDR killers et le BYOVD.</p>
+
+            <div class="veille-category-card" data-topic="cloud">
+                <span class="veille-category-icon">☁️</span>
+                <h3>Cloud & Infrastructure</h3>
+                <p>Évolutions des services cloud, virtualisation, conteneurisation et nouvelles architectures système.</p>
             </div>
-            <div class="veille-category-card" data-topic="certfr">
-                <span class="veille-category-icon">🇫🇷</span>
-                <h3>Alertes CERT-FR</h3>
-                <p>Avis et alertes de sécurité publiés par l'ANSSI.</p>
+
+            <div class="veille-category-card" data-topic="devops">
+                <span class="veille-category-icon">🚀</span>
+                <h3>DevOps & Automatisation</h3>
+                <p>Outils d'automatisation, CI/CD, orchestration et meilleures pratiques pour optimiser le déploiement.</p>
             </div>
         </div>
 
@@ -186,120 +84,135 @@
                     <button class="veille-live-refresh" id="veilleLiveRefresh" type="button">↻ Actualiser</button>
                 </div>
             </div>
-            <div class="veille-live-list" id="veilleLiveList" aria-live="polite">
+            <div class="veille-live-list" id="veilleLiveList">
                 <p class="veille-live-loading">⏳ Chargement des dernières actualités...</p>
             </div>
         </div>
 
-        <!-- Articles analysés -->
-        <h3 class="veille-heading">Articles <span class="accent-text">analysés</span></h3>
+        <h3 class="section-title" style="font-size: 2rem; margin-bottom: 3rem;">Articles <span class="accent-text">récents</span></h3>
+
         <div class="veille-articles">
+            <!-- Article 1 -->
             <div class="veille-article">
                 <div class="veille-article-header">
-                    <span class="veille-article-date">Novembre 2026</span>
-                    <h3>Windows 11 : la nouvelle plateforme de sécurité qui sort les antivirus du noyau</h3>
-                    <span class="veille-article-category">Windows</span>
+                    <span class="veille-article-date">Février 2026</span>
+                    <h3>L'essor de l'Intelligence Artificielle dans la cybersécurité</h3>
+                    <span class="veille-article-category">Cybersécurité</span>
                 </div>
                 <div class="veille-article-content">
-                    <p>Calendrier d'adoption par éditeur et fonctionnement de la Windows Endpoint Security Platform, qui donne accès aux fonctions de sécurité par des API en mode utilisateur.</p>
-                    <a href="https://www.techrepublic.com/article/news-windows-11-antivirus-security-platform/" class="veille-article-link" target="_blank" rel="noopener">Lire l'article (TechRepublic)</a>
+                    <p>
+                        Les systèmes d'IA révolutionnent la détection des menaces en analysant des millions de points de données 
+                        en temps réel. Cette approche permet d'identifier des patterns d'attaque jamais vus auparavant.
+                    </p>
+                    <a href="#" class="veille-article-link">Lire l'article</a>
                 </div>
             </div>
 
+            <!-- Article 2 -->
             <div class="veille-article">
                 <div class="veille-article-header">
-                    <span class="veille-article-date">Mars 2026</span>
-                    <h3>EDR killers : au-delà des pilotes vulnérables</h3>
-                    <span class="veille-article-category">Menaces</span>
+                    <span class="veille-article-date">Janvier 2026</span>
+                    <h3>Kubernetes : Les nouvelles fonctionnalités 2026</h3>
+                    <span class="veille-article-category">Infrastructure</span>
                 </div>
                 <div class="veille-article-content">
-                    <p>Étude d'ESET sur près de 90 EDR killers observés : BYOVD majoritaire, mais aussi scripts, outils anti-rootkit détournés et méthodes sans pilote.</p>
-                    <a href="https://www.welivesecurity.com/en/eset-research/edr-killers-explained-beyond-the-drivers/" class="veille-article-link" target="_blank" rel="noopener">Lire l'article (ESET)</a>
+                    <p>
+                        Kubernetes continue d'évoluer avec de nouvelles fonctionnalités axées sur la sécurité, 
+                        la simplification du déploiement et l'amélioration des performances pour les workloads critiques.
+                    </p>
+                    <a href="#" class="veille-article-link">Lire l'article</a>
                 </div>
             </div>
 
+            <!-- Article 3 -->
             <div class="veille-article">
                 <div class="veille-article-header">
-                    <span class="veille-article-date">Avril 2026</span>
-                    <h3>Qilin et Warlock désactivent plus de 300 outils EDR</h3>
-                    <span class="veille-article-category">Rançongiciels</span>
+                    <span class="veille-article-date">Janvier 2026</span>
+                    <h3>Zero Trust : Le nouveau standard de sécurité réseau</h3>
+                    <span class="veille-article-category">Cybersécurité</span>
                 </div>
                 <div class="veille-article-content">
-                    <p>Comment deux groupes de rançongiciels utilisent des pilotes vulnérables pour neutraliser les protections avant le chiffrement.</p>
-                    <a href="https://thehackernews.com/2026/04/qilin-and-warlock-ransomware-use.html" class="veille-article-link" target="_blank" rel="noopener">Lire l'article (The Hacker News)</a>
+                    <p>
+                        Le modèle Zero Trust devient incontournable pour les entreprises. 
+                        Cette approche qui consiste à ne jamais faire confiance par défaut transforme la façon dont nous sécurisons nos infrastructures.
+                    </p>
+                    <a href="#" class="veille-article-link">Lire l'article</a>
                 </div>
             </div>
 
+            <!-- Article 4 -->
             <div class="veille-article">
                 <div class="veille-article-header">
-                    <span class="veille-article-date">Juin 2025</span>
-                    <h3>The Windows Resiliency Initiative</h3>
-                    <span class="veille-article-category">Source officielle</span>
+                    <span class="veille-article-date">Décembre 2025</span>
+                    <h3>PowerShell 7.5 : Quoi de neuf ?</h3>
+                    <span class="veille-article-category">DevOps</span>
                 </div>
                 <div class="veille-article-content">
-                    <p>Annonce de Microsoft : préversion pour les éditeurs de sécurité, récupération rapide des postes bloqués et réduction des droits administrateur.</p>
-                    <a href="https://blogs.windows.com/windowsexperience/2025/06/26/the-windows-resiliency-initiative-building-resilience-for-a-future-ready-enterprise/" class="veille-article-link" target="_blank" rel="noopener">Lire l'article (Microsoft)</a>
+                    <p>
+                        La dernière version de PowerShell apporte des améliorations significatives en termes de performance 
+                        et de nouvelles cmdlets pour simplifier l'administration système multiplateforme.
+                    </p>
+                    <a href="#" class="veille-article-link">Lire l'article</a>
                 </div>
             </div>
 
+            <!-- Article 5 -->
             <div class="veille-article">
                 <div class="veille-article-header">
-                    <span class="veille-article-date">2025 – 2026</span>
-                    <h3>L'économie des EDR killers</h3>
-                    <span class="veille-article-category">Menaces</span>
+                    <span class="veille-article-date">Décembre 2025</span>
+                    <h3>Sécurité Active Directory : Meilleures pratiques 2026</h3>
+                    <span class="veille-article-category">Cybersécurité</span>
                 </div>
                 <div class="veille-article-content">
-                    <p>Analyse de SentinelOne (en français) : les EDR killers vendus comme des produits commerciaux aux affiliés des groupes de rançongiciels.</p>
-                    <a href="https://www.sentinelone.com/fr/blog/bring-your-own-vulnerable-device-the-edr-killer-economy/" class="veille-article-link" target="_blank" rel="noopener">Lire l'article (SentinelOne)</a>
+                    <p>
+                        Active Directory reste une cible privilégiée des attaquants. 
+                        Découvrez les dernières recommandations pour sécuriser votre AD et protéger votre organisation contre les attaques modernes.
+                    </p>
+                    <a href="#" class="veille-article-link">Lire l'article</a>
                 </div>
             </div>
 
+            <!-- Article 6 -->
             <div class="veille-article">
                 <div class="veille-article-header">
-                    <span class="veille-article-date">Référence technique</span>
-                    <h3>Règles de blocage des pilotes recommandées par Microsoft</h3>
-                    <span class="veille-article-category">Bonnes pratiques</span>
+                    <span class="veille-article-date">Novembre 2025</span>
+                    <h3>L'avenir de la virtualisation avec Hyper-V et VMware</h3>
+                    <span class="veille-article-category">Infrastructure</span>
                 </div>
                 <div class="veille-article-content">
-                    <p>Documentation officielle de la liste de blocage des pilotes vulnérables, la première parade contre la technique BYOVD.</p>
-                    <a href="https://learn.microsoft.com/fr-fr/windows/security/application-security/application-control/app-control-for-business/design/microsoft-recommended-driver-block-rules" class="veille-article-link" target="_blank" rel="noopener">Lire la documentation (Microsoft Learn)</a>
+                    <p>
+                        Comparaison des dernières évolutions des deux géants de la virtualisation 
+                        et leurs stratégies pour rester pertinents face à l'émergence des containers et du cloud natif.
+                    </p>
+                    <a href="#" class="veille-article-link">Lire l'article</a>
                 </div>
             </div>
         </div>
 
-        <!-- Méthode -->
         <div class="veille-sources">
-            <h3>Ma méthode de veille</h3>
-            <div class="veille-method">
-                <div class="veille-method-step">
-                    <span class="veille-method-num">1</span>
-                    <h4>Collecter</h4>
-                    <p>Flux RSS regroupés dans un agrégateur (Feedly / Inoreader) et alertes Google sur « EDR », « BYOVD » et « CrowdStrike ».</p>
-                </div>
-                <div class="veille-method-step">
-                    <span class="veille-method-num">2</span>
-                    <h4>Trier</h4>
-                    <p>Lecture hebdomadaire, en privilégiant les sources officielles (ANSSI, Microsoft) et les rapports de recherche des éditeurs.</p>
-                </div>
-                <div class="veille-method-step">
-                    <span class="veille-method-num">3</span>
-                    <h4>Synthétiser</h4>
-                    <p>Chaque article retenu est résumé et daté sur cette page, avec ce qu'il change concrètement pour un administrateur.</p>
-                </div>
-            </div>
-            <h4 class="veille-sources-subtitle">Mes sources</h4>
+            <h3>Mes sources de veille</h3>
             <div class="sources-grid">
-                <div class="source-item"><a href="https://www.cert.ssi.gouv.fr/" target="_blank" rel="noopener">CERT-FR (ANSSI)</a></div>
-                <div class="source-item"><a href="https://www.lemondeinformatique.fr/" target="_blank" rel="noopener">Le Monde Informatique</a></div>
-                <div class="source-item"><a href="https://www.zdnet.fr/" target="_blank" rel="noopener">ZDNet</a></div>
-                <div class="source-item"><a href="https://thehackernews.com/" target="_blank" rel="noopener">The Hacker News</a></div>
-                <div class="source-item"><a href="https://www.bleepingcomputer.com/" target="_blank" rel="noopener">BleepingComputer</a></div>
-                <div class="source-item"><a href="https://www.welivesecurity.com/fr/" target="_blank" rel="noopener">WeLiveSecurity (ESET)</a></div>
-                <div class="source-item"><a href="https://blogs.windows.com/windows-security/" target="_blank" rel="noopener">Blog Windows Security</a></div>
-                <div class="source-item"><a href="https://www.reddit.com/r/sysadmin/" target="_blank" rel="noopener">r/sysadmin</a></div>
+                <div class="source-item">
+                    <a href="https://www.lemondeinformatique.fr/" target="_blank">Le Monde Informatique</a>
+                </div>
+                <div class="source-item">
+                    <a href="https://www.zdnet.fr/" target="_blank">ZDNet</a>
+                </div>
+                <div class="source-item">
+                    <a href="https://www.silicon.fr/" target="_blank">Silicon.fr</a>
+                </div>
+                <div class="source-item">
+                    <a href="https://www.reddit.com/r/sysadmin/" target="_blank">r/sysadmin</a>
+                </div>
+                <div class="source-item">
+                    <a href="https://news.ycombinator.com/" target="_blank">Hacker News</a>
+                </div>
+                <div class="source-item">
+                    <a href="https://www.cert.ssi.gouv.fr/" target="_blank">CERT-FR</a>
+                </div>
             </div>
         </div>
-    </div>
+        </div>
 </section>
 
     <footer>
@@ -310,9 +223,9 @@
             </div>
             <div class="footer-links">
                 <a href="mailto:votre@email.com">Email</a>
-                <a href="https://github.com/TartiFloux" target="_blank" rel="noopener">GitHub</a>
-                <a href="https://linkedin.com/in/leguaymelvyn" target="_blank" rel="noopener">LinkedIn</a>
-                <a href="https://drive.google.com/file/d/1U8oiVSxj1oqTdxWoufsMnDy12orH7d-z/view" target="_blank" rel="noopener">CV</a>
+                <a href="https://github.com/TartiFloux" target="_blank">GitHub</a>
+                <a href="https://linkedin.com/in/leguaymelvyn" target="_blank">LinkedIn</a>
+                <a href="https://drive.google.com/file/d/1U8oiVSxj1oqTdxWoufsMnDy12orH7d-z/view" target="_blank">CV</a>
             </div>
         </div>
     </footer>

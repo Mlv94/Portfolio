@@ -2,41 +2,26 @@
 const menuToggle = document.getElementById('menuToggle');
 const nav = document.getElementById('nav');
 
-function setMenuOpen(open) {
-    menuToggle.classList.toggle('active', open);
-    nav.classList.toggle('active', open);
-    menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-    menuToggle.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
-}
-
 menuToggle.addEventListener('click', () => {
-    setMenuOpen(!nav.classList.contains('active'));
-});
-
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && nav.classList.contains('active')) {
-        setMenuOpen(false);
-        menuToggle.focus();
-    }
+    menuToggle.classList.toggle('active');
+    nav.classList.toggle('active');
 });
 
 // Fermer le menu quand on clique sur un lien
 document.querySelectorAll('nav a').forEach(link => {
-    link.addEventListener('click', () => setMenuOpen(false));
+    link.addEventListener('click', () => {
+        menuToggle.classList.remove('active');
+        nav.classList.remove('active');
+    });
 });
 
 // Cursor glow effect
 const cursorGlow = document.querySelector('.cursor-glow');
 
-// Uniquement sur les appareils avec une souris (inutile sur mobile / tactile)
-if (cursorGlow && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    document.addEventListener('mousemove', (e) => {
-        cursorGlow.style.left = e.clientX + 'px';
-        cursorGlow.style.top = e.clientY + 'px';
-    });
-} else if (cursorGlow) {
-    cursorGlow.remove();
-}
+document.addEventListener('mousemove', (e) => {
+    cursorGlow.style.left = e.clientX + 'px';
+    cursorGlow.style.top = e.clientY + 'px';
+});
 
 // Smooth scroll (uniquement pour les ancres internes à la page courante)
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -80,7 +65,7 @@ const observer = new IntersectionObserver((entries) => {
     // ouvrez la console du navigateur et tapez :
     // crypto.subtle.digest('SHA-256', new TextEncoder().encode('votre_nouveau_mdp'))
     //   .then(b => console.log([...new Uint8Array(b)].map(x => x.toString(16).padStart(2,'0')).join('')))
-    // puis collez le résultat ci-dessous.
+    // puis collez le résultat ci-dessous. Mot de passe par défaut : portfolio2026
     const SITE_PASSWORD_HASH = '9881928f60e14fcbd7a28d2166ee4e8ba456daa9df696159dcae35050762895b';
     const STORAGE_KEY = 'siteUnlocked';
 
@@ -169,22 +154,18 @@ const observer = new IntersectionObserver((entries) => {
 
     // Un sujet = un flux RSS public associé. hnrss.org génère un flux RSS
     // à partir d'une recherche sur Hacker News, mis à jour en continu.
-    // "fallback" : lien affiché si le flux ne peut pas être chargé.
     const topics = {
-        edr: {
-            label: 'EDR / XDR',
-            feed: 'https://hnrss.org/newest?q=EDR+OR+XDR+OR+CrowdStrike',
-            fallback: 'https://www.bleepingcomputer.com/tag/edr/'
+        cybersecurite: {
+            label: 'Cybersécurité',
+            feed: 'https://hnrss.org/newest?q=cybersecurity'
         },
-        ransomware: {
-            label: 'Rançongiciels',
-            feed: 'https://hnrss.org/newest?q=ransomware',
-            fallback: 'https://www.bleepingcomputer.com/tag/ransomware/'
+        cloud: {
+            label: 'Cloud & Infrastructure',
+            feed: 'https://hnrss.org/newest?q=cloud'
         },
-        certfr: {
-            label: 'Alertes CERT-FR',
-            feed: 'https://www.cert.ssi.gouv.fr/feed/',
-            fallback: 'https://www.cert.ssi.gouv.fr/'
+        devops: {
+            label: 'DevOps & Automatisation',
+            feed: 'https://hnrss.org/newest?q=devops'
         }
     };
 
@@ -209,11 +190,7 @@ const observer = new IntersectionObserver((entries) => {
     }
 
     function renderError() {
-        const topic = topics[currentTopic];
-        const link = topic && topic.fallback
-            ? ` <a href="${topic.fallback}" target="_blank" rel="noopener">Consulter directement la source →</a>`
-            : '';
-        list.innerHTML = `<p class="veille-live-error">Le flux n'a pas pu être chargé pour le moment.${link}</p>`;
+        list.innerHTML = '<p class="veille-live-error">Le flux n\'a pas pu être chargé pour le moment. Réessayez dans quelques instants.</p>';
     }
 
     function renderItems(items) {
@@ -225,7 +202,7 @@ const observer = new IntersectionObserver((entries) => {
             const rawDesc = (item.description || '').replace(/<[^>]*>/g, '').trim();
             const shortDesc = rawDesc.length > 160 ? rawDesc.slice(0, 160) + '…' : rawDesc;
             return `
-                <a class="veille-live-item" href="${escapeHTML(item.link)}" target="_blank" rel="noopener">
+                <a class="veille-live-item" href="${item.link}" target="_blank" rel="noopener">
                     <span class="veille-live-item-date">📅 ${formatDate(item.pubDate)}</span>
                     <span class="veille-live-item-title">${escapeHTML(item.title)}</span>
                     ${shortDesc ? `<span class="veille-live-item-desc">${escapeHTML(shortDesc)}</span>` : ''}
@@ -249,10 +226,7 @@ const observer = new IntersectionObserver((entries) => {
         const apiUrl = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(topic.feed);
 
         fetch(apiUrl)
-            .then(res => {
-                if (!res.ok) throw new Error('HTTP ' + res.status);
-                return res.json();
-            })
+            .then(res => res.json())
             .then(data => {
                 if (data.status !== 'ok') throw new Error('Flux indisponible');
                 renderItems(data.items);
@@ -289,12 +263,10 @@ const observer = new IntersectionObserver((entries) => {
     }
 
     // Sujet chargé par défaut à l'arrivée sur la page
-    loadTopic('edr');
+    loadTopic('cybersecurite');
 })();
 
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-document.querySelectorAll('.project-card, .project-feature-card, .skill-group, .formation-item, .veille-category-card, .veille-article, .experience-item, .home-card, .veille-def, .veille-stake, .veille-timeline li').forEach(el => {
-    if (prefersReducedMotion) return;
+document.querySelectorAll('.project-card, .skill-category, .formation-item, .veille-category-card, .veille-article, .experience-item').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(30px)';
     el.style.transition = 'all 0.6s ease-out';
