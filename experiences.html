@@ -19,17 +19,17 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="cursor-glow"></div>
+    <div class="cursor-glow" aria-hidden="true"></div>
 
     <header>
-        <div class="logo">Portfolio - Melvyn</div>
+        <a href="index.html" class="logo">Portfolio - Melvyn</a>
 
         <!-- Menu Burger -->
-        <div class="menu-toggle" id="menuToggle">
+        <button type="button" class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav">
             <span></span>
             <span></span>
             <span></span>
-        </div>
+        </button>
 
         <nav id="nav">
             <a href="index.html">Accueil</a>
@@ -156,7 +156,7 @@
                 </div>
             </div>
         </div>
-        </div>
+    </div>
 </section>
 
     <footer>
@@ -167,9 +167,9 @@
             </div>
             <div class="footer-links">
                 <a href="mailto:votre@email.com">Email</a>
-                <a href="https://github.com/TartiFloux" target="_blank">GitHub</a>
-                <a href="https://linkedin.com/in/leguaymelvyn" target="_blank">LinkedIn</a>
-                <a href="https://drive.google.com/file/d/1U8oiVSxj1oqTdxWoufsMnDy12orH7d-z/view" target="_blank">CV</a>
+                <a href="https://github.com/TartiFloux" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://linkedin.com/in/leguaymelvyn" target="_blank" rel="noopener">LinkedIn</a>
+                <a href="https://drive.google.com/file/d/1U8oiVSxj1oqTdxWoufsMnDy12orH7d-z/view" target="_blank" rel="noopener">CV</a>
             </div>
         </div>
     </footer>
