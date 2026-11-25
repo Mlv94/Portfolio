@@ -19,17 +19,17 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="cursor-glow"></div>
+    <div class="cursor-glow" aria-hidden="true"></div>
 
     <header>
-        <div class="logo">Portfolio - Melvyn</div>
+        <a href="index.html" class="logo">Portfolio - Melvyn</a>
 
         <!-- Menu Burger -->
-        <div class="menu-toggle" id="menuToggle">
+        <button type="button" class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav">
             <span></span>
             <span></span>
             <span></span>
-        </div>
+        </button>
 
         <nav id="nav">
             <a href="index.html">Accueil</a>
@@ -45,38 +45,73 @@
 <section id="competences">
     <div class="container">
         <h2 class="section-title">Mes <span class="accent-text">compétences</span></h2>
-        <p class="section-intro">Les technologies et outils que je mobilise, de l'administration réseau au développement de petits outils.</p>
+        <p class="section-intro">Les technologies que j'ai mises en pratique en formation, en stage et sur mes projets personnels.</p>
         <div class="skills-groups">
             <div class="skill-group">
                 <div class="skill-group-header">
-                    <h3>Réseaux</h3>
+                    <h3>Systèmes</h3>
                     <span class="skill-group-count">6</span>
                 </div>
                 <div class="skill-pills">
                     <span class="skill-pill">Windows Server 2022</span>
-                    <span class="skill-pill">Active Directory</span>
-                    <span class="skill-pill">Commutation</span>
-                    <span class="skill-pill">Virtualisation</span>
-                    <span class="skill-pill">Fibre optique</span>
-                    <span class="skill-pill">SGBD / MySQL</span>
+                    <span class="skill-pill">Active Directory (AD DS)</span>
+                    <span class="skill-pill">Stratégies de groupe (GPO)</span>
+                    <span class="skill-pill">Linux</span>
+                    <span class="skill-pill">Microsoft Exchange</span>
+                    <span class="skill-pill">Virtualisation (VirtualBox / VMware)</span>
                 </div>
             </div>
-
             <div class="skill-group">
                 <div class="skill-group-header">
-                    <h3>Langages</h3>
+                    <h3>Réseaux</h3>
+                    <span class="skill-group-count">5</span>
+                </div>
+                <div class="skill-pills">
+                    <span class="skill-pill">Adressage IP</span>
+                    <span class="skill-pill">Commutation</span>
+                    <span class="skill-pill">Câblage réseau</span>
+                    <span class="skill-pill">Fibre optique (soudure, raccordement)</span>
+                    <span class="skill-pill">Cisco Packet Tracer</span>
+                </div>
+            </div>
+            <div class="skill-group">
+                <div class="skill-group-header">
+                    <h3>Sécurité</h3>
                     <span class="skill-group-count">3</span>
+                </div>
+                <div class="skill-pills">
+                    <span class="skill-pill">XDR CrowdStrike Falcon</span>
+                    <span class="skill-pill">Politique de mots de passe</span>
+                    <span class="skill-pill">Gestion des droits utilisateurs</span>
+                </div>
+            </div>
+            <div class="skill-group">
+                <div class="skill-group-header">
+                    <h3>Support & gestion de parc</h3>
+                    <span class="skill-group-count">4</span>
+                </div>
+                <div class="skill-pills">
+                    <span class="skill-pill">GLPI</span>
+                    <span class="skill-pill">FusionInventory</span>
+                    <span class="skill-pill">Ticketing (Service Manager)</span>
+                    <span class="skill-pill">Dépannage poste de travail</span>
+                </div>
+            </div>
+            <div class="skill-group">
+                <div class="skill-group-header">
+                    <h3>Langages & données</h3>
+                    <span class="skill-group-count">4</span>
                 </div>
                 <div class="skill-pills">
                     <span class="skill-pill">PowerShell</span>
                     <span class="skill-pill">Python</span>
                     <span class="skill-pill">Lua</span>
+                    <span class="skill-pill">MySQL</span>
                 </div>
             </div>
-
             <div class="skill-group">
                 <div class="skill-group-header">
-                    <h3>Outils & Design</h3>
+                    <h3>Outils & création</h3>
                     <span class="skill-group-count">5</span>
                 </div>
                 <div class="skill-pills">
@@ -84,11 +119,11 @@
                     <span class="skill-pill">Photoshop / Premiere Pro</span>
                     <span class="skill-pill">Blender</span>
                     <span class="skill-pill">BlockBench</span>
-                    <span class="skill-pill">Hammer Editor (Garry's Mod)</span>
+                    <span class="skill-pill">Hammer Editor</span>
                 </div>
             </div>
         </div>
-        </div>
+    </div>
 </section>
 
     <footer>
@@ -99,9 +134,9 @@
             </div>
             <div class="footer-links">
                 <a href="mailto:votre@email.com">Email</a>
-                <a href="https://github.com/TartiFloux" target="_blank">GitHub</a>
-                <a href="https://linkedin.com/in/leguaymelvyn" target="_blank">LinkedIn</a>
-                <a href="https://drive.google.com/file/d/1U8oiVSxj1oqTdxWoufsMnDy12orH7d-z/view" target="_blank">CV</a>
+                <a href="https://github.com/TartiFloux" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://linkedin.com/in/leguaymelvyn" target="_blank" rel="noopener">LinkedIn</a>
+                <a href="https://drive.google.com/file/d/1U8oiVSxj1oqTdxWoufsMnDy12orH7d-z/view" target="_blank" rel="noopener">CV</a>
             </div>
         </div>
     </footer>

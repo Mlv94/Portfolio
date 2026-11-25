@@ -1712,3 +1712,381 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+
+/* =========================================================
+   AMÉLIORATIONS 2026-11
+   ========================================================= */
+
+/* Logo cliquable */
+a.logo {
+    text-decoration: none;
+}
+
+/* Le burger est maintenant un vrai <button> : on retire le style natif */
+button.menu-toggle {
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    margin: -0.5rem;
+}
+
+@media (max-width: 968px) {
+    button.menu-toggle {
+        display: flex;
+    }
+}
+
+/* Pas de halo de curseur sur les écrans tactiles */
+@media (hover: none) {
+    .cursor-glow {
+        display: none;
+    }
+}
+
+/* Listes des projets phares : le texte reste d'un seul bloc */
+.project-feature-list li > span:last-child {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Visuels des projets sans image (icône sur dégradé) */
+.project-image--icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4.5rem;
+    background: linear-gradient(135deg, rgba(150, 255, 243, 0.12) 0%, var(--bg-primary) 100%);
+}
+
+/* ---------- Accueil : section « En bref » ---------- */
+.home-overview {
+    padding: 6rem 4rem;
+    border-top: 1px solid var(--border);
+}
+
+.home-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.home-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 1.75rem;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: var(--bg-secondary);
+}
+
+.home-stat-value {
+    font-family: 'Fraunces', serif;
+    font-size: 2.75rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+}
+
+.home-stat-label {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.home-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.home-card {
+    display: block;
+    padding: 2rem;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.home-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+}
+
+.home-card-kicker {
+    display: block;
+    color: var(--accent);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.6rem;
+}
+
+.home-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem;
+    margin-bottom: 0.6rem;
+}
+
+.home-card h3::after {
+    content: ' →';
+    color: var(--accent);
+}
+
+.home-card p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+/* ---------- Veille : sujet ---------- */
+.veille-heading {
+    font-family: 'Fraunces', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 5rem 0 2rem;
+}
+
+.veille-subject {
+    padding: 3rem;
+    border: 1px solid var(--accent);
+    border-radius: 24px;
+    background: linear-gradient(135deg, rgba(150, 255, 243, 0.08) 0%, var(--bg-secondary) 60%);
+}
+
+.veille-subject-kicker {
+    display: inline-block;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.veille-subject h3 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+    max-width: 900px;
+}
+
+.veille-subject-question {
+    font-size: 1.15rem;
+    color: var(--text-primary);
+    max-width: 850px;
+    padding-left: 1.25rem;
+    border-left: 3px solid var(--accent);
+    margin-bottom: 2rem;
+}
+
+.veille-subject-question strong {
+    color: var(--accent);
+}
+
+.veille-subject-why h4 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.veille-subject-why p {
+    color: var(--text-secondary);
+    max-width: 850px;
+    line-height: 1.8;
+}
+
+.veille-subject-why strong {
+    color: var(--text-primary);
+}
+
+/* ---------- Veille : notions clés ---------- */
+.veille-defs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+}
+
+.veille-def {
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--bg-secondary);
+}
+
+.veille-def-term {
+    display: inline-block;
+    font-family: 'Fraunces', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+}
+
+.veille-def p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+/* ---------- Veille : chronologie ---------- */
+.veille-timeline {
+    list-style: none;
+    position: relative;
+    padding-left: 2rem;
+    border-left: 2px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 2.25rem;
+}
+
+.veille-timeline li {
+    position: relative;
+}
+
+.veille-timeline li::before {
+    content: '';
+    position: absolute;
+    left: calc(-2rem - 7px);
+    top: 0.35rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 4px var(--bg-primary);
+}
+
+.veille-timeline-date {
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.veille-timeline h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0.2rem 0 0.4rem;
+}
+
+.veille-timeline p {
+    color: var(--text-secondary);
+    max-width: 800px;
+}
+
+/* ---------- Veille : enjeux ---------- */
+.veille-stakes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 5rem;
+}
+
+.veille-stake {
+    padding: 1.75rem;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--bg-secondary);
+}
+
+.veille-stake-icon {
+    font-size: 1.8rem;
+    display: block;
+    margin-bottom: 0.75rem;
+}
+
+.veille-stake h4 {
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+}
+
+.veille-stake p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+/* ---------- Veille : méthode & sources ---------- */
+.veille-method {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.veille-method-step {
+    padding: 1.5rem;
+    border-radius: 16px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+}
+
+.veille-method-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--bg-primary);
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+}
+
+.veille-method-step h4 {
+    margin-bottom: 0.4rem;
+}
+
+.veille-method-step p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.veille-sources-subtitle {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+.veille-live-error a {
+    color: var(--accent);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+    .home-stats,
+    .home-cards,
+    .veille-method {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .home-overview {
+        padding: 4rem 1.5rem;
+    }
+
+    .veille-subject,
+    .veille-sources {
+        padding: 1.75rem;
+    }
+
+    .veille-articles {
+        grid-template-columns: 1fr;
+    }
+
+    .project-card {
+        min-width: 0;
+        flex: 0 0 85%;
+        max-width: 85%;
+    }
+
+    .project-card .project-tags {
+        flex-wrap: wrap;
+    }
+}
