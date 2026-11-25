@@ -2,119 +2,17 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <script>
-        (function () {
-            try {
-                if (localStorage.getItem('siteUnlocked') !== '1') {
-                    document.documentElement.style.visibility = 'hidden';
-                }
-            } catch (e) {}
-        })();
-    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio - LEGUAY Melvyn</title>
     <meta name="description" content="Portfolio de LEGUAY Melvyn, technicien supérieur en informatique (BTS SIO SISR) - Accueil.">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,600;9..144,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <meta name="robots" content="noindex, nofollow" data-lock>
 </head>
-<body>
-    <div class="cursor-glow" aria-hidden="true"></div>
-
-    <header>
-        <a href="index.html" class="logo">Portfolio - Melvyn</a>
-
-        <!-- Menu Burger -->
-        <button type="button" class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-
-        <nav id="nav">
-            <a href="index.html" class="active">Accueil</a>
-            <a href="experiences.html">Expériences</a>
-            <a href="formations.html">Formations</a>
-            <a href="projets.html">Projets</a>
-            <a href="competences.html">Compétences</a>
-            <a href="veille.html">Veille technologique</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-    </header>
-
-<section class="hero" id="accueil">
-        <div class="hero-content">
-            <h1>LEGUAY Melvyn</h1>
-            <p class="hero-role">Technicien supérieur en informatique <span class="accent-text">BTS SIO SISR</span></p>
-            <div class="hero-meta">
-                <div class="hero-meta-item">
-                    <span class="hero-meta-label">Formation</span>
-                    <span class="hero-meta-value">BTS SIO SISR · 2025–2027</span>
-                </div>
-                <div class="hero-meta-item">
-                    <span class="hero-meta-label">Spécialité</span>
-                    <span class="hero-meta-value">Infrastructure & réseaux</span>
-                </div>
-                <div class="hero-meta-item">
-                    <span class="hero-meta-label">Établissement</span>
-                    <span class="hero-meta-value">Lycée Polyvalent de Cachan</span>
-                </div>
-            </div>
-            <div class="hero-actions">
-                <a href="experiences.html" class="cta-button">
-                    <span>Découvrir mon parcours</span>
-                </a>
-                <a href="contact.html" class="cta-button cta-button-ghost">
-                    <span>Me contacter</span>
-                </a>
-            </div>
-        </div>
-        <div class="hero-decoration" aria-hidden="true"></div>
-    </section>
-
-    <section class="home-overview" aria-labelledby="overviewTitle">
-        <div class="container">
-            <h2 class="section-title" id="overviewTitle">En <span class="accent-text">bref</span></h2>
-            <div class="home-stats">
-                <div class="home-stat"><span class="home-stat-value">6</span><span class="home-stat-label">stages en entreprise et collectivités</span></div>
-                <div class="home-stat"><span class="home-stat-value">2021</span><span class="home-stat-label">début de mon parcours en systèmes numériques</span></div>
-                <div class="home-stat"><span class="home-stat-value">2</span><span class="home-stat-label">projets d'infrastructure documentés</span></div>
-            </div>
-            <div class="home-cards">
-                <a href="experiences.html" class="home-card">
-                    <span class="home-card-kicker">Terrain</span>
-                    <h3>Expériences</h3>
-                    <p>Du raccordement fibre chez Orange au déploiement de l'XDR CrowdStrike Falcon au Département du Val-de-Marne.</p>
-                </a>
-                <a href="projets.html" class="home-card">
-                    <span class="home-card-kicker">Réalisations</span>
-                    <h3>Projets</h3>
-                    <p>Domaine Active Directory avec GPO, gestion de parc avec GLPI et FusionInventory, serveurs de jeu.</p>
-                </a>
-                <a href="veille.html" class="home-card">
-                    <span class="home-card-kicker">Veille technologique</span>
-                    <h3>EDR / XDR</h3>
-                    <p>Comment protéger les postes de travail sans mettre en danger leur stabilité, après la panne CrowdStrike de 2024.</p>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="footer-inner">
-            <div>
-                <div class="footer-brand">LEGUAY Melvyn</div>
-                <p class="footer-copy">&copy; 2026 · Tous droits réservés.</p>
-            </div>
-            <div class="footer-links">
-                <a href="mailto:votre@email.com">Email</a>
-                <a href="https://github.com/TartiFloux" target="_blank" rel="noopener">GitHub</a>
-                <a href="https://linkedin.com/in/leguaymelvyn" target="_blank" rel="noopener">LinkedIn</a>
-                <a href="https://drive.google.com/file/d/1U8oiVSxj1oqTdxWoufsMnDy12orH7d-z/view" target="_blank" rel="noopener">CV</a>
-            </div>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
+<body class="is-locked">
+    <noscript><p class="lock-noscript">Ce portfolio est protégé : activez JavaScript pour le déverrouiller.</p></noscript>
+    <script type="application/json" id="encrypted-page">{"v":1,"kdf":"PBKDF2-SHA256","iter":600000,"salt":"oXYEAdDPG2DRvza8B5YdHQ==","iv":"MpCwjf6+d+o1ujLs","data":"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"}</script>
+    <script src="lock.js"></script>
 </body>
 </html>
