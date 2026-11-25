@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Chiffrement du portfolio</title>
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --bg-2: #1a1a1a;
+            --border: #2a2a2a;
+            --accent: #96fff3;
+            --text: #f5f5f5;
+            --muted: #a0a0a0;
+            --ok: #96fff3;
+            --warn: #ffc978;
+            --err: #ff9696;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 3rem 1.25rem;
+        }
+        main { max-width: 760px; margin: 0 auto; }
+        h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+        h1 span { color: var(--accent); }
+        h2 { font-size: 1.1rem; margin-bottom: 1rem; }
+        p, li { color: var(--muted); }
+        .lead { margin-bottom: 2rem; }
+        .card {
+            background: var(--bg-2);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+        ol { padding-left: 1.25rem; }
+        ol li { margin-bottom: 0.4rem; }
+        code { color: var(--text); background: var(--bg); padding: 0.1rem 0.35rem; border-radius: 6px; font-size: 0.9em; }
+        label { display: block; font-weight: 700; font-size: 0.9rem; margin: 1rem 0 0.4rem; color: var(--text); }
+        label:first-of-type { margin-top: 0; }
+        input[type="password"], input[type="text"] {
+            width: 100%;
+            font: inherit;
+            padding: 0.8rem 1rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: var(--text);
+        }
+        input:focus { outline: none; border-color: var(--accent); }
+        input[type="file"] { color: var(--muted); font: inherit; }
+        .hint { font-size: 0.85rem; margin-top: 0.4rem; }
+        .row { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.5rem; }
+        button, .btn {
+            font: inherit;
+            font-weight: 700;
+            padding: 0.75rem 1.4rem;
+            border-radius: 999px;
+            border: 1px solid var(--accent);
+            background: var(--accent);
+            color: var(--bg);
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        button.secondary, .btn.secondary { background: transparent; color: var(--accent); }
+        button:disabled { opacity: 0.5; cursor: wait; }
+        .show { display: flex; align-items: center; gap: 0.5rem; font-weight: 400; color: var(--muted); margin-top: 0.75rem; }
+        #message { margin-top: 1rem; min-height: 1.5rem; }
+        #message.err { color: var(--err); }
+        #message.ok { color: var(--ok); }
+        #results { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+        #results li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--bg);
+        }
+        .name { color: var(--text); font-weight: 600; }
+        .status { font-size: 0.85rem; }
+        .status.ok { color: var(--ok); }
+        .status.warn { color: var(--warn); }
+        .status.err { color: var(--err); }
+        .btn.small { padding: 0.4rem 1rem; font-size: 0.85rem; }
+        details summary { cursor: pointer; color: var(--text); font-weight: 700; }
+        details p { margin-top: 0.75rem; }
+    </style>
+</head>
+<body>
+<main>
+    <h1>Chiffrement du <span>portfolio</span></h1>
+    <p class="lead">Outil pour modifier les pages protégées par mot de passe. Tout se passe dans votre navigateur : aucun fichier ni mot de passe n'est envoyé sur Internet.</p>
+
+    <div class="card">
+        <h2>Comment ça marche</h2>
+        <ol>
+            <li><strong>Pour modifier une page :</strong> déposez ici la page en ligne (ex. <code>competences.html</code> téléchargée depuis GitHub). L'outil la <strong>déchiffre</strong> et vous rend la version lisible.</li>
+            <li>Modifiez cette version lisible avec votre éditeur habituel.</li>
+            <li>Déposez-la à nouveau ici : l'outil la <strong>chiffre</strong>.</li>
+            <li>Envoyez le fichier chiffré sur GitHub (« Add file » → « Upload files »), à la place de l'ancien.</li>
+        </ol>
+        <p class="hint">L'outil détecte tout seul si un fichier est chiffré ou non. Ne mettez <strong>jamais</strong> la version lisible sur GitHub : le dépôt est public.</p>
+    </div>
+
+    <div class="card">
+        <label for="password">Mot de passe</label>
+        <input type="password" id="password" autocomplete="off" spellcheck="false">
+        <label for="confirm">Confirmer le mot de passe <span style="font-weight:400;color:var(--muted)">(nécessaire seulement pour chiffrer)</span></label>
+        <input type="password" id="confirm" autocomplete="off" spellcheck="false">
+        <label class="show"><input type="checkbox" id="showPwd"> Afficher le mot de passe</label>
+
+        <label for="files" style="margin-top:1.5rem">Fichiers HTML</label>
+        <input type="file" id="files" accept=".html,text/html" multiple>
+        <p class="hint">Vous pouvez sélectionner plusieurs pages d'un coup.</p>
+
+        <div class="row">
+            <button type="button" id="process">Traiter les fichiers</button>
+        </div>
+        <p id="message" role="status"></p>
+    </div>
+
+    <div class="card" id="resultsCard" hidden>
+        <h2>Fichiers prêts</h2>
+        <ul id="results"></ul>
+        <div class="row">
+            <button type="button" class="secondary" id="downloadAll">Tout télécharger</button>
+        </div>
+    </div>
+
+    <div class="card">
+        <details>
+            <summary>Changer le mot de passe</summary>
+            <p>Déchiffrez toutes les pages avec l'ancien mot de passe, puis chiffrez-les toutes avec le nouveau et remplacez-les sur GitHub. Les visiteurs déjà connectés devront saisir le nouveau mot de passe.</p>
+            <p>Choisissez un mot de passe long : au moins 4 mots sans rapport entre eux, ou 16 caractères minimum.</p>
+        </details>
+    </div>
+</main>
+
+<script>
+(function () {
+    'use strict';
+
+    // Paramètres partagés avec lock.js (le sel et le nombre d'itérations sont stockés dans chaque page)
+    const SITE_SALT = 'oXYEAdDPG2DRvza8B5YdHQ==';
+    const ITERATIONS = 600000;
+    const LOCK_META = '<meta name="robots" content="noindex, nofollow" data-lock>';
+
+    const $ = id => document.getElementById(id);
+    const pwd = $('password');
+    const confirmPwd = $('confirm');
+    const filesInput = $('files');
+    const processBtn = $('process');
+    const message = $('message');
+    const resultsCard = $('resultsCard');
+    const resultsList = $('results');
+    let outputs = [];
+
+    $('showPwd').addEventListener('change', e => {
+        const type = e.target.checked ? 'text' : 'password';
+        pwd.type = type;
+        confirmPwd.type = type;
+    });
+
+    function b64ToBytes(b64) {
+        const bin = atob(b64);
+        const bytes = new Uint8Array(bin.length);
+        for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+        return bytes;
+    }
+
+    function bytesToB64(bytes) {
+        let bin = '';
+        for (let i = 0; i < bytes.length; i += 0x8000) {
+            bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+        }
+        return btoa(bin);
+    }
+
+    const keyCache = new Map();
+    async function deriveKey(password, saltB64, iterations) {
+        const cacheKey = saltB64 + '|' + iterations;
+        if (keyCache.has(cacheKey)) return keyCache.get(cacheKey);
+        const material = await crypto.subtle.importKey('raw', new TextEncoder().encode(password.normalize('NFC')), 'PBKDF2', false, ['deriveKey']);
+        const key = await crypto.subtle.deriveKey(
+            { name: 'PBKDF2', salt: b64ToBytes(saltB64), iterations, hash: 'SHA-256' },
+            material,
+            { name: 'AES-GCM', length: 256 },
+            false,
+            ['encrypt', 'decrypt']
+        );
+        keyCache.set(cacheKey, key);
+        return key;
+    }
+
+    function splitDocument(html) {
+        const htmlTag = html.match(/<html[^>]*>/i);
+        const head = html.match(/<head(?:\s[^>]*)?>([\s\S]*?)<\/head>/i);
+        const body = html.match(/<body(?:\s[^>]*)?>([\s\S]*)<\/body>/i);
+        if (!head || !body) throw new Error('balises <head> ou <body> introuvables');
+        return {
+            htmlTag: htmlTag ? htmlTag[0] : '<html lang="fr">',
+            head: head[1],
+            body: body[1]
+        };
+    }
+
+    function escapeForScript(json) {
+        // Empêche toute fermeture prématurée de la balise <script>
+        return json.replace(/</g, '\\u003c');
+    }
+
+    async function encryptDocument(html, password) {
+        const doc = splitDocument(html);
+        const key = await deriveKey(password, SITE_SALT, ITERATIONS);
+        const iv = crypto.getRandomValues(new Uint8Array(12));
+        const cipher = new Uint8Array(await crypto.subtle.encrypt(
+            { name: 'AES-GCM', iv },
+            key,
+            new TextEncoder().encode(doc.body)
+        ));
+        const payload = {
+            v: 1,
+            kdf: 'PBKDF2-SHA256',
+            iter: ITERATIONS,
+            salt: SITE_SALT,
+            iv: bytesToB64(iv),
+            data: bytesToB64(cipher)
+        };
+        const head = doc.head.replace(/\n?[ \t]*<meta[^>]*data-lock[^>]*>/gi, '').replace(/\s*$/, '');
+        return '<!DOCTYPE html>\n' + doc.htmlTag + '\n<head>' + head + '\n    ' + LOCK_META + '\n</head>\n' +
+            '<body class="is-locked">\n' +
+            '    <noscript><p class="lock-noscript">Ce portfolio est protégé : activez JavaScript pour le déverrouiller.</p></noscript>\n' +
+            '    <script type="application/json" id="encrypted-page">' + escapeForScript(JSON.stringify(payload)) + '<\/script>\n' +
+            '    <script src="lock.js"><\/script>\n' +
+            '</body>\n</html>\n';
+    }
+
+    async function decryptDocument(html, password) {
+        const doc = splitDocument(html);
+        const match = html.match(/<script[^>]*id="encrypted-page"[^>]*>([\s\S]*?)<\/script>/i);
+        const payload = JSON.parse(match[1]);
+        const key = await deriveKey(password, payload.salt, payload.iter);
+        let plain;
+        try {
+            plain = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: b64ToBytes(payload.iv) }, key, b64ToBytes(payload.data));
+        } catch (e) {
+            throw new Error('mot de passe incorrect');
+        }
+        const body = new TextDecoder().decode(plain);
+        const head = doc.head.replace(/\n?[ \t]*<meta[^>]*data-lock[^>]*>/gi, '').replace(/\s*$/, '') + '\n';
+        return '<!DOCTYPE html>\n' + doc.htmlTag + '\n<head>' + head + '</head>\n<body>' + body + '</body>\n</html>\n';
+    }
+
+    function isEncrypted(html) {
+        return /id="encrypted-page"/.test(html);
+    }
+
+    function setMessage(text, kind) {
+        message.textContent = text;
+        message.className = kind || '';
+    }
+
+    function addResult(name, statusText, statusKind, content) {
+        const li = document.createElement('li');
+        const left = document.createElement('div');
+        left.innerHTML = '<div class="name"></div><div class="status ' + statusKind + '"></div>';
+        left.querySelector('.name').textContent = name;
+        left.querySelector('.status').textContent = statusText;
+        li.appendChild(left);
+        if (content) {
+            const url = URL.createObjectURL(new Blob([content], { type: 'text/html;charset=utf-8' }));
+            const a = document.createElement('a');
+            a.className = 'btn small';
+            a.href = url;
+            a.download = name;
+            a.textContent = 'Télécharger';
+            li.appendChild(a);
+            outputs.push(a);
+        }
+        resultsList.appendChild(li);
+    }
+
+    processBtn.addEventListener('click', async () => {
+        const files = Array.from(filesInput.files || []);
+        const password = pwd.value;
+        if (!password) return setMessage('Saisissez le mot de passe.', 'err');
+        if (!files.length) return setMessage('Sélectionnez au moins un fichier HTML.', 'err');
+
+        const contents = await Promise.all(files.map(f => f.text()));
+        const needsEncryption = contents.some(c => !isEncrypted(c));
+        if (needsEncryption) {
+            if (password !== confirmPwd.value) {
+                return setMessage('Pour chiffrer, les deux mots de passe doivent être identiques.', 'err');
+            }
+            if (password.length < 12) {
+                return setMessage('Mot de passe trop court pour chiffrer : 12 caractères minimum (16 ou plus recommandés).', 'err');
+            }
+        }
+
+        processBtn.disabled = true;
+        setMessage('Traitement en cours… (quelques secondes)');
+        outputs.forEach(a => URL.revokeObjectURL(a.href));
+        outputs = [];
+        resultsList.innerHTML = '';
+        resultsCard.hidden = false;
+
+        let errors = 0;
+        for (let i = 0; i < files.length; i++) {
+            const name = files[i].name;
+            try {
+                if (isEncrypted(contents[i])) {
+                    addResult(name, 'Déchiffré : version lisible, à ne pas publier', 'warn', await decryptDocument(contents[i], password));
+                } else {
+                    addResult(name, 'Chiffré : prêt à être envoyé sur GitHub', 'ok', await encryptDocument(contents[i], password));
+                }
+            } catch (e) {
+                errors++;
+                addResult(name, 'Erreur : ' + e.message, 'err', null);
+            }
+        }
+        processBtn.disabled = false;
+        setMessage(errors ? errors + ' fichier(s) en erreur.' : 'Terminé.', errors ? 'err' : 'ok');
+    });
+
+    $('downloadAll').addEventListener('click', () => {
+        outputs.forEach((a, i) => setTimeout(() => a.click(), i * 300));
+    });
+
+    if (!window.crypto || !crypto.subtle) {
+        processBtn.disabled = true;
+        setMessage('Ce navigateur ne permet pas le chiffrement. Utilisez un navigateur récent (Chrome, Firefox, Edge, Safari).', 'err');
+    }
+})();
+</script>
+</body>
+</html>

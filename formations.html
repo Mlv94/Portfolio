@@ -2,125 +2,17 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <script>
-        (function () {
-            try {
-                if (localStorage.getItem('siteUnlocked') !== '1') {
-                    document.documentElement.style.visibility = 'hidden';
-                }
-            } catch (e) {}
-        })();
-    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formations - LEGUAY Melvyn</title>
     <meta name="description" content="Portfolio de LEGUAY Melvyn, technicien supérieur en informatique (BTS SIO SISR) - Formations.">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,600;9..144,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <meta name="robots" content="noindex, nofollow" data-lock>
 </head>
-<body>
-    <div class="cursor-glow" aria-hidden="true"></div>
-
-    <header>
-        <a href="index.html" class="logo">Portfolio - Melvyn</a>
-
-        <!-- Menu Burger -->
-        <button type="button" class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-
-        <nav id="nav">
-            <a href="index.html">Accueil</a>
-            <a href="experiences.html">Expériences</a>
-            <a href="formations.html" class="active">Formations</a>
-            <a href="projets.html">Projets</a>
-            <a href="competences.html">Compétences</a>
-            <a href="veille.html">Veille technologique</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-    </header>
-
-<section id="formations">
-    <div class="container">
-        <h2 class="section-title">Mon <span class="accent-text">parcours</span></h2>
-        <p class="section-intro">Du Bac Pro Systèmes Numériques au BTS SIO SISR, une spécialisation progressive vers l'administration d'infrastructures.</p>
-        <div class="formations-timeline">
-
-            <!-- Formation 1 - BTS SIO -->
-            <div class="formation-item">
-                <div class="formation-date">2025 - 2027</div>
-                <div class="formation-icon">🎓</div>
-                <div class="formation-content">
-                    <h3 class="formation-school">Lycée Polyvalent de Cachan</h3>
-                    <p class="formation-degree">BTS Services Informatiques aux Organisations</p>
-                    <p class="formation-description">
-                        Spécialisation SISR (Solutions d'Infrastructure, Systèmes et Réseaux).
-                        Formation axée sur l'administration des systèmes, la gestion des réseaux et la sécurité informatique.
-                    </p>
-                    <div class="formation-highlights">
-                        <h4>Compétences clés</h4>
-                        <ul>
-                            <li>Administration systèmes</li>
-                            <li>Linux</li>
-                            <li>MySQL</li>
-                            <li>Virtualisation (VirtualBox / VMWare)</li>
-                            <li>PowerShell</li>
-                            <li>Windows Server</li>
-                            <li>Active Directory</li>
-                            <li>Câblage réseau</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Formation 2 - Bac Pro -->
-            <div class="formation-item">
-                <div class="formation-date">2021 - 2024</div>
-                <div class="formation-icon">🔧</div>
-                <div class="formation-content">
-                    <h3 class="formation-school">Lycée Polyvalent Paul Bert</h3>
-                    <p class="formation-degree">Baccalauréat Professionnel Systèmes Numériques</p>
-                    <p class="formation-description">
-                        Formation technique complète sur les systèmes numériques, l'électronique et les réseaux informatiques.
-                        Acquisition de compétences pratiques en installation et maintenance d'équipements numériques.
-                    </p>
-                    <div class="formation-highlights">
-                        <h4>Compétences acquises</h4>
-                        <ul>
-                            <li>Réseaux informatiques</li>
-                            <li>Windows Server</li>
-                            <li>Active Directory</li>
-                            <li>Raspberry Pi 3</li>
-                            <li>Cisco Packet Tracer</li>
-                            <li>DualBoot</li>
-                            <li>Commutation</li>
-                            <li>Câblage réseau</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-    <footer>
-        <div class="footer-inner">
-            <div>
-                <div class="footer-brand">LEGUAY Melvyn</div>
-                <p class="footer-copy">&copy; 2026 · Tous droits réservés.</p>
-            </div>
-            <div class="footer-links">
-                <a href="mailto:votre@email.com">Email</a>
-                <a href="https://github.com/TartiFloux" target="_blank" rel="noopener">GitHub</a>
-                <a href="https://linkedin.com/in/leguaymelvyn" target="_blank" rel="noopener">LinkedIn</a>
-                <a href="https://drive.google.com/file/d/1U8oiVSxj1oqTdxWoufsMnDy12orH7d-z/view" target="_blank" rel="noopener">CV</a>
-            </div>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
+<body class="is-locked">
+    <noscript><p class="lock-noscript">Ce portfolio est protégé : activez JavaScript pour le déverrouiller.</p></noscript>
+    <script type="application/json" id="encrypted-page">{"v":1,"kdf":"PBKDF2-SHA256","iter":600000,"salt":"oXYEAdDPG2DRvza8B5YdHQ==","iv":"0u0TLNDOb0SBX39+","data":"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"}</script>
+    <script src="lock.js"></script>
 </body>
 </html>
